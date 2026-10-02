@@ -1,0 +1,21 @@
+[Unit]
+Description=Carnet horloger et collection partagee
+After=network.target
+
+[Service]
+Type=simple
+User=watches
+Group=watches
+WorkingDirectory=/opt/watch-collection
+EnvironmentFile=/etc/watch-collection.env
+ExecStart=/usr/bin/node /opt/watch-collection/server.cjs
+Restart=on-failure
+RestartSec=3
+NoNewPrivileges=true
+PrivateTmp=true
+ProtectSystem=strict
+ProtectHome=true
+ReadWritePaths=/var/lib/watch-collection
+
+[Install]
+WantedBy=multi-user.target

@@ -1,17 +1,17 @@
 # La collection — carnet horloger
 
-Application personnelle autonome : **un seul fichier `index.html`**, sans framework, compte utilisateur ni serveur applicatif. Style sombre validé à partir des maquettes, et 41 fiches initiales issues du magazine fourni.
+Carnet horloger au style sombre, avec 41 fiches initiales issues du magazine fourni. **Un fichier HTML** suffit à l’usage local. Pour retrouver les mêmes données entre navigateurs, un petit serveur Node.js sans dépendances npm sert le HTML et sauvegarde un JSON privé. Aucun Docker ni service externe requis.
 
 ## Utiliser le carnet
 
-Téléchargez `index.html` puis ouvrez-le dans votre navigateur, ou copiez-le sur votre hébergement statique. Aucun autre fichier du dépôt n’est nécessaire au fonctionnement de l’application.
+Pour l’usage local, téléchargez `index.html` et ouvrez-le dans votre navigateur. Pour la synchronisation sur votre homelab, suivez [le guide de déploiement](docs/homelab.md) : Node.js 20+, deux fichiers applicatifs et un dossier de données durable.
 
 - **Ma collection** : explorer les candidates de chaque rôle et choisir explicitement votre montre principale. Le rôle diver reste une envie future.
 - **Le catalogue** : rechercher un modèle, ses caractéristiques ou vos notes ; filtrer par rôle et trier.
 - **La fiche** : consulter les caractéristiques, les photos/variantes disponibles et les liens ; modifier la fiche et saisir vos notes.
 - **Ajouter une montre** : saisie manuelle du modèle, des catégories, des caractéristiques, des notes et des URL HTTPS des photos et de la fiche produit.
 
-Les notes et les choix sont sauvegardés dans ce navigateur. Ils ne modifient pas automatiquement le fichier HTML sur votre serveur ou le dépôt GitHub.
+En mode local, notes et choix restent dans ce navigateur. En mode connecté, ils sont enregistrés sur votre serveur et retrouvés depuis vos autres navigateurs. L’indicateur de sauvegarde distingue les changements locaux, la synchronisation en cours et les données réellement enregistrées sur le serveur. Les modifications ne changent pas le dépôt GitHub.
 
 ## Sauvegarder et transférer
 
@@ -25,13 +25,13 @@ La sauvegarde locale dépend du navigateur et de l’adresse du site. Effacer se
 
 Les deux photos déjà intégrées au magazine restent embarquées. Les autres photos et variantes nécessitent un accès aux sites sources et peuvent ne pas se charger ; les emplacements manquants sont indiqués. Le détourage IA expérimental de la maquette n’est pas utilisé dans l’application : les photos originales sont conservées.
 
-Les données ne sont pas envoyées à un service de stockage ou à une IA. Les liens externes s’ouvrent dans un nouvel onglet. Le JSON et l’HTML exportés contiennent vos notes : ne les publiez que si vous souhaitez les partager. Un hébergement statique public ne fournit pas d’authentification.
+En mode connecté, les données sont envoyées uniquement à votre serveur ; aucun service IA ou stockage tiers n’est utilisé. Les liens externes s’ouvrent dans un nouvel onglet. Le JSON et l’HTML exportés contiennent vos notes : ne les publiez que si vous souhaitez les partager. Un hébergement statique public ne fournit pas d’authentification.
 
-Cette version propose l’ajout **manuel**. L’enrichissement IA, la synchronisation entre appareils, la suppression des fiches et le score de poignet restent des étapes ultérieures. Les informations du magazine n’ont pas été revérifiées ; les catégories des modèles hors collection sont des propositions modifiables.
+Cette version propose l’ajout **manuel**. L’enrichissement IA, la suppression des fiches et le score de poignet restent des étapes ultérieures. Les informations du magazine n’ont pas été revérifiées ; les catégories des modèles hors collection sont des propositions modifiables.
 
 ## Développer et vérifier
 
-Le code de l’application est dans `index.html`. Node.js et Playwright servent uniquement aux vérifications et au serveur local optionnel : ils ne sont pas des dépendances de l’application livrée.
+Le code de l’application est dans `index.html`. Playwright sert uniquement aux tests. Node.js est nécessaire au serveur partagé ; l’usage local du HTML seul n’en a pas besoin. Le serveur utilise uniquement la bibliothèque standard de Node.
 
 ```sh
 npm ci --ignore-scripts
@@ -51,12 +51,14 @@ npm test
 npm start
 ```
 
-Port par défaut : 8765, écoute uniquement sur la machine locale. `PORT` permet de le changer. Un simple hébergement statique suffit au déploiement.
+Port par défaut : 8765, écoute uniquement sur la machine locale. `PORT` permet de le changer. Sans `COLLECTION_PASSWORD`, le serveur sert le carnet en mode local uniquement. Avec cette variable privée et un dossier de données durable, il active la synchronisation. Voir [le guide homelab](docs/homelab.md).
 
 Les tests vérifient la persistance après rechargement, l’édition, l’ajout, les catégories/choix, les sauvegardes JSON et HTML, les imports invalides et annulés, l’échappement des textes, les restrictions de liens, le stockage indisponible/corrompu, les conflits entre onglets et l’affichage mobile. Les téléchargements des photos tierces ne sont pas validés par cette suite.
 
 ## Documentation
 
+- [Déploiement homelab et synchronisation](docs/homelab.md)
+- [Version 0.2 : formulaire et sauvegarde partagée](docs/version-0.2.md)
 - [Version 0.1 et choix techniques](docs/version-0.1.md)
 - [Maquettes et direction visuelle](docs/maquettes.md)
 - Les maquettes précédentes restent dans `maquettes/` ; leurs notes sont temporaires. L’application sauvegardant vos données est à la racine du dépôt.
