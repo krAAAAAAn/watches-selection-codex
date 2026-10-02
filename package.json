@@ -1,0 +1,12 @@
+{
+  "name": "watches-selection",
+  "version": "0.1.0",
+  "private": true,
+  "description": "Carnet horloger autonome en un fichier HTML",
+  "scripts": {
+    "start": "node tools/serve.cjs",
+    "test": "node tests/app.cjs"
+  },
+  "engines": { "node": ">=20" },
+  "devDependencies": { "playwright": "1.62.1" }
+}
