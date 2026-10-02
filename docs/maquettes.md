@@ -13,7 +13,7 @@ Source : fichier fourni `Comparatif_montres_magazine_2026_collection_v27.html`. 
 Le bouton Ajouter expose les étapes d’un futur enrichissement. Il ne lance pas de requête IA. Choix et notes sont temporaires et disparaissent au rechargement ; aucune donnée n’est envoyée ni sauvegardée.
 
 ## Direction visuelle
-Papier clair, vert profond, titres à empattements et mise en page aérée. Quatre cartes par ligne sur grand écran, deux sur tablette et une sur mobile. Les liens documentaires HTTPS ouvrent un nouvel onglet.
+Révision 02 après retour utilisateur : fond anthracite, texte clair, accent bleu froid et typographie sans empattements. Fonds photo et cadrages normalisés ; suppression du mélange de couleurs des images avec le fond. Quatre cartes par ligne sur grand écran, deux sur tablette et une sur mobile. Les liens documentaires HTTPS ouvrent un nouvel onglet.
 
 ## Images
 Les deux visuels déjà embarqués dans la source (Concordia et Tsuyosa) sont conservés dans le fichier. Les autres images et variantes conservent leurs URL sources ; leur affichage dépend du réseau et des sites tiers. Le proxy de cet environnement a refusé les téléchargements externes (403) lors de la préparation. Un emplacement explicitement marqué remplace une photo non chargée, sans inventer le modèle.
@@ -26,3 +26,6 @@ Les deux visuels déjà embarqués dans la source (Concordia et Tsuyosa) sont co
 
 ## Suite proposée
 Développer ensuite seulement : modèle de données pérenne, sauvegarde/export/import, édition manuelle et images locales fiables. Le score de poignet est différé : 18 cm seuls ne suffisent pas à calculer une note fiable.
+
+## Essai de détourage
+La Concordia dispose d’un visuel transparent produit par IA uniquement pour évaluer la direction graphique. Ce traitement peut modifier des détails : il ne constitue pas une photo produit de référence. La photo source est conservée dans la fiche pour comparaison. Pour la version définitive, préférer des PNG fabricants transparents ou un détourage fidèle des photographies sources, avec contrôle des détails. Les autres photos ne sont pas annoncées comme détourées.
