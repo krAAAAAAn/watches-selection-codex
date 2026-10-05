@@ -11,6 +11,8 @@ const assert=require('node:assert/strict');const fs=require('node:fs/promises');
   const contexts=await Promise.all([browser.newContext(),browser.newContext()]);for(const c of contexts)await c.route('https://**',r=>r.abort());
   const [a,b]=await Promise.all(contexts.map(c=>c.newPage()));const errors=[];for(const p of [a,b])p.on('pageerror',e=>errors.push(e.message));
   async function connect(page){await page.goto(base);await page.locator('[data-connect]').first().waitFor();await page.locator('[data-connect]').first().click();await page.locator('#sharedPassword').fill(password);await page.locator('#loginButton').click();await page.locator('#syncDialog').waitFor({state:'hidden'});await page.waitForFunction(()=>document.querySelector('#saveState').textContent.includes('à jour'))}
+  const localServer=createServer({dataDir:dir});await new Promise(r=>localServer.listen(0,'127.0.0.1',r));
+  try{await a.goto('http://127.0.0.1:'+localServer.address().port);await a.getByText('Ce serveur est en mode local :',{exact:false}).waitFor();assert.deepEqual(await fs.readdir(dir),[])}finally{await new Promise(r=>localServer.close(r))}
   await connect(a);assert.equal(JSON.parse(await fs.readFile(path.join(dir,'collection.json'),'utf8')).collection.watches.length,41);await connect(b);
   async function notes(page){await page.locator('[data-page="catalogue"]').click();await page.locator('[data-detail="watch-35"]').click()}
   await notes(a);await a.locator('#note').fill('Note partagée depuis A');await a.waitForFunction(()=>document.querySelector('#saveState').textContent.includes('à jour'));

@@ -77,3 +77,11 @@ Sauvegardez régulièrement le dossier de données ou exportez un JSON depuis l�
 Cette version utilise un seul mot de passe et une seule collection personnelle, pas plusieurs comptes. Le détourage et la disponibilité des photos restent indépendants de la synchronisation.
 
 Le serveur, la persistance après redémarrage et les conflits entre navigateurs sont testés dans l’environnement de développement. Votre accès réseau, votre reverse proxy et votre unité systemd devront être vérifiés sur votre machine après installation.
+
+## Le serveur répond mais aucun JSON n’est créé
+
+Si le terminal indique « Synchronisation désactivée (COLLECTION_PASSWORD absent) », les modifications restent dans le stockage propre au navigateur. Configurez le mot de passe dans l’environnement du **processus serveur**, puis redémarrez ce processus. Avec systemd, modifiez son `EnvironmentFile` et redémarrez le service ; une variable exportée dans un autre terminal n’affecte pas un service déjà lancé.
+
+Connectez d’abord le navigateur contenant vos choix actuels, puis attendez « Collection partagée · à jour ». C’est cette première connexion/sauvegarde qui initialise le fichier `collection.json`. Le dossier par défaut est `.collection-data` à côté de `server.cjs` : son nom commence par un point et peut être caché par votre explorateur. Le terminal affiche désormais son chemin lorsque la synchronisation est activée.
+
+Connectez ensuite les autres navigateurs avec le même mot de passe. Si le fichier n’apparaît toujours pas, vérifiez le dossier configuré et ses droits d’écriture, ainsi que le message de synchronisation dans l’interface. Pour un accès HTTP local, `COLLECTION_SECURE_COOKIES` doit rester à `0` ; réservez `1` à votre accès HTTPS.

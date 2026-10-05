@@ -84,7 +84,7 @@ if(require.main===module){
 const port=Number(process.env.PORT||8765),host=process.env.HOST||'127.0.0.1';
 if(!Number.isInteger(port)||port<1||port>65535)throw Error('PORT doit être compris entre 1 et 65535.');
 const server=createServer({password:process.env.COLLECTION_PASSWORD||'',dataDir:process.env.COLLECTION_DATA_DIR,secureCookies:process.env.COLLECTION_SECURE_COOKIES==='1'});
-server.listen(port,host,()=>console.log(`Carnet sur le port ${port}. Synchronisation ${process.env.COLLECTION_PASSWORD?'activée':'désactivée (COLLECTION_PASSWORD absent)'}.`));
+server.listen(port,host,()=>{console.log(`Carnet sur le port ${port}. Synchronisation ${process.env.COLLECTION_PASSWORD?'activée':'désactivée (COLLECTION_PASSWORD absent)'}.`);if(process.env.COLLECTION_PASSWORD)console.log('Dossier de données : '+path.resolve(process.env.COLLECTION_DATA_DIR||path.join(__dirname,'.collection-data'))+' (créé après la première connexion et sauvegarde).');});
 server.on('error',e=>{console.error(e.message);process.exitCode=1});
 
 }
