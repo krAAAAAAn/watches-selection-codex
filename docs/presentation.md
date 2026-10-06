@@ -1,5 +1,7 @@
 # Version 0.6 — favicon, mode clair et détourage local
 
+**Correctif 0.6.1** : [limite portée à 100 Mo, brouillons IndexedDB et détourage par contours réglable, avec exemple Charlie Slim](correctifs-0.6.1.md). Les limites à 1 600 pixels et la méthode décrite ci-dessous documentent la version initiale ; consultez le correctif pour le fonctionnement actuel.
+
 ## Mise à jour
 
 Remplacez `index.html` et `server.cjs`, conservez votre `.env` et le dossier de données, puis redémarrez le serveur et rechargez tous les navigateurs. Aucun paquet, service supplémentaire ou changement de configuration n’est nécessaire.

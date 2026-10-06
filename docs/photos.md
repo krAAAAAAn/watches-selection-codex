@@ -20,7 +20,7 @@ Cette version ne fabrique pas de détourage IA et ne change pas les détails de 
 
 ## Limites et validation
 
-Maximum : 2 Mo par nouvelle photo et 28 Mo pour le carnet enrichi, afin de garder les exports et la synchronisation sous la limite serveur de 30 Mo. Il n’y a pas de compression automatique pouvant altérer les photos. Un stockage local de navigateur saturé reste signalé ; utilisez la sauvegarde serveur et les exports.
+Depuis la version 0.6.1 : 2 Mo par nouvelle photo et 100 Mo pour le JSON du carnet, avec une limite serveur cohérente. Les brouillons partagés utilisent IndexedDB ; les nouveaux détourages sont calculés à 1 000 pixels maximum avant marge. Voir [le correctif](correctifs-0.6.1.md). Il n’y a pas de compression automatique pouvant altérer les photos. Un stockage local de navigateur saturé reste signalé ; utilisez la sauvegarde serveur et les exports.
 
 La route de téléchargement exige une connexion. Elle accepte seulement HTTPS vers des adresses publiques, vérifie aussi les redirections et conserve la validation TLS. Elle refuse les adresses du réseau local ; elle ne transmet ni cookies ni mot de passe de collection aux sites tiers. Les téléchargements ont une limite de taille et de durée.
 

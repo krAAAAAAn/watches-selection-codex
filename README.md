@@ -83,6 +83,10 @@ Version 0.5 : analyse simple des fiches produit, proposition avec sources et val
 
 Version 0.5.1 : sur la fiche, choisissez une variante ou une photo, puis **Afficher dans ma collection** pour mémoriser son illustration. Le choix suit la sauvegarde partagée et les exports. Voir [le fonctionnement des variantes](docs/gestion.md).
 
+## Correctifs de sauvegarde et détourage
+
+Version 0.6.1 : limite de collection portée à 100 Mo, brouillons partagés stockés dans IndexedDB, détourages plus légers et méthode par contours avec réglage des ombres, testée sur la Charlie Slim. Mettez à jour les **deux fichiers** applicatifs. Voir [le correctif et son aperçu réel](docs/correctifs-0.6.1.md).
+
 ## Apparence et détourage
 
 Version 0.6 : favicon embarqué, mode clair/sombre mémorisé dans le navigateur, et **Détourer cette photo** sur la fiche. Le détourage local cible les fonds clairs et unis, avec aperçu à valider, original conservé et résultat partagé entre navigateurs. Il ne nécessite aucun service IA. Voir [le fonctionnement et les limites](docs/presentation.md).
