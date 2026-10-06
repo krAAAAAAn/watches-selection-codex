@@ -27,7 +27,7 @@ Les deux photos déjà intégrées au magazine restent embarquées. Les autres p
 
 En mode connecté, les données sont envoyées uniquement à votre serveur ; aucun service IA ou stockage tiers n’est utilisé. Les liens externes s’ouvrent dans un nouvel onglet. Le JSON et l’HTML exportés contiennent vos notes : ne les publiez que si vous souhaitez les partager. Un hébergement statique public ne fournit pas d’authentification.
 
-Cette version propose l’ajout **manuel**. L’enrichissement IA, la suppression des fiches et le score de poignet restent des étapes ultérieures. Les informations du magazine n’ont pas été revérifiées ; les catégories des modèles hors collection sont des propositions modifiables.
+Cette version propose l’ajout **manuel**. L’enrichissement IA et le score de poignet restent des étapes ultérieures. Les informations du magazine n’ont pas été revérifiées ; les catégories des modèles hors collection sont des propositions modifiables.
 
 ## Développer et vérifier
 
@@ -66,3 +66,7 @@ Les tests vérifient la persistance après rechargement, l’édition, l’ajout
 ## Photos conservées sur votre serveur
 
 Version 0.3 : **Gérer les photos** copie les visuels avec leur provenance dans la collection partagée. Les fiches permettent aussi d’importer un fichier local. Les PNG transparents sont reconnus et les cadres de présentation sont homogènes, sans retouche de la montre. Voir [le guide photos](docs/photos.md) pour la mise à jour et la copie en lot.
+
+## Statuts, variantes et archivage
+
+Version 0.4 : statuts possédée/souhaitée/écartée, archives réversibles, suppression confirmée et édition des variantes de couleur, sources et avis. Les choix principaux restent cohérents avec les fiches actives. Voir [le guide de gestion](docs/gestion.md).
