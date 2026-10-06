@@ -9,7 +9,7 @@ Pour l’usage local, téléchargez `index.html` et ouvrez-le dans votre navigat
 - **Ma collection** : explorer les candidates de chaque rôle et choisir explicitement votre montre principale. Le rôle diver reste une envie future.
 - **Le catalogue** : rechercher un modèle, ses caractéristiques ou vos notes ; filtrer par rôle et trier.
 - **La fiche** : consulter les caractéristiques, les photos/variantes disponibles et les liens ; modifier la fiche et saisir vos notes.
-- **Ajouter une montre** : saisie manuelle du modèle, des catégories, des caractéristiques, des notes et des URL HTTPS des photos et de la fiche produit.
+- **Ajouter une montre** : saisie manuelle ou proposition depuis une fiche produit HTTPS, avec enrichissement IA facultatif et vérification avant enregistrement.
 
 En mode local, notes et choix restent dans ce navigateur. En mode connecté, ils sont enregistrés sur votre serveur et retrouvés depuis vos autres navigateurs. L’indicateur de sauvegarde distingue les changements locaux, la synchronisation en cours et les données réellement enregistrées sur le serveur. Les modifications ne changent pas le dépôt GitHub.
 
@@ -25,9 +25,9 @@ La sauvegarde locale dépend du navigateur et de l’adresse du site. Effacer se
 
 Les deux photos déjà intégrées au magazine restent embarquées. Les autres photos et variantes nécessitent un accès aux sites sources et peuvent ne pas se charger ; les emplacements manquants sont indiqués. Le détourage IA expérimental de la maquette n’est pas utilisé dans l’application : les photos originales sont conservées.
 
-En mode connecté, les données sont envoyées uniquement à votre serveur ; aucun service IA ou stockage tiers n’est utilisé. Les liens externes s’ouvrent dans un nouvel onglet. Le JSON et l’HTML exportés contiennent vos notes : ne les publiez que si vous souhaitez les partager. Un hébergement statique public ne fournit pas d’authentification.
+Par défaut, les données sont envoyées uniquement à votre serveur. Si vous configurez un fournisseur IA et cochez « Enrichir avec l’IA » pour une fiche, son contenu public lui est transmis ; vos notes personnelles et votre collection ne sont pas envoyées. Les liens externes s’ouvrent dans un nouvel onglet. Le JSON et l’HTML exportés contiennent vos notes : ne les publiez que si vous souhaitez les partager. Un hébergement statique public ne fournit pas d’authentification.
 
-Cette version propose l’ajout **manuel**. L’enrichissement IA et le score de poignet restent des étapes ultérieures. Les informations du magazine n’ont pas été revérifiées ; les catégories des modèles hors collection sont des propositions modifiables.
+Cette version propose l’ajout **manuel ou depuis une URL**, avec un fournisseur IA compatible facultatif. La recherche par nom et le score de poignet restent des étapes ultérieures. Les informations du magazine n’ont pas été revérifiées ; les catégories des modèles hors collection sont des propositions modifiables.
 
 ## Développer et vérifier
 
@@ -57,6 +57,8 @@ Les tests vérifient la persistance après rechargement, l’édition, l’ajout
 
 ## Documentation
 
+- [Version 0.5 : import par URL et configuration du fournisseur IA facultatif](docs/import-ia.md)
+
 - [Banc d’essai de l’import : résultats, limites et comparaison envisagée avec l’IA](docs/banc-essai-import.md)
 
 - [Déploiement homelab et synchronisation](docs/homelab.md)
@@ -72,3 +74,7 @@ Version 0.3 : **Gérer les photos** copie les visuels avec leur provenance dans 
 ## Statuts, variantes et archivage
 
 Version 0.4 : statuts possédée/souhaitée/écartée, archives réversibles, suppression confirmée et édition des variantes de couleur, sources et avis. Les choix principaux restent cohérents avec les fiches actives. Voir [le guide de gestion](docs/gestion.md).
+
+## Ajout par URL et IA facultative
+
+Version 0.5 : analyse simple des fiches produit, proposition avec sources et validation manuelle. Pour activer l’enrichissement IA, configurez `AI_ENDPOINT` (URL complète Chat Completions), `AI_MODEL` et éventuellement `AI_API_KEY` dans l’environnement du serveur. Sans ces variables, le carnet reste utilisable et l’analyse simple ne fait aucun appel IA. Voir [la configuration et les limites](docs/import-ia.md).

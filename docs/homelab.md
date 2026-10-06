@@ -85,3 +85,7 @@ Si le terminal indique « Synchronisation désactivée (COLLECTION_PASSWORD abse
 Connectez d’abord le navigateur contenant vos choix actuels, puis attendez « Collection partagée · à jour ». C’est cette première connexion/sauvegarde qui initialise le fichier `collection.json`. Le dossier par défaut est `.collection-data` à côté de `server.cjs` : son nom commence par un point et peut être caché par votre explorateur. Le terminal affiche désormais son chemin lorsque la synchronisation est activée.
 
 Connectez ensuite les autres navigateurs avec le même mot de passe. Si le fichier n’apparaît toujours pas, vérifiez le dossier configuré et ses droits d’écriture, ainsi que le message de synchronisation dans l’interface. Pour un accès HTTP local, `COLLECTION_SECURE_COOKIES` doit rester à `0` ; réservez `1` à votre accès HTTPS.
+
+## Analyse IA facultative (version 0.5)
+
+L’ajout depuis une URL fonctionne sans service IA. Pour un enrichissement facultatif, ajoutez `AI_ENDPOINT`, `AI_MODEL` et si nécessaire `AI_API_KEY` dans le même fichier d’environnement privé, puis redémarrez le serveur. Le fournisseur doit proposer une API compatible Chat Completions. Voir [le guide de configuration](import-ia.md), avec les exemples de fournisseur distant et de modèle local. La saisie manuelle reste disponible en toutes circonstances.
