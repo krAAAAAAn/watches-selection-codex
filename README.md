@@ -62,3 +62,7 @@ Les tests vérifient la persistance après rechargement, l’édition, l’ajout
 - [Version 0.1 et choix techniques](docs/version-0.1.md)
 - [Maquettes et direction visuelle](docs/maquettes.md)
 - Les maquettes précédentes restent dans `maquettes/` ; leurs notes sont temporaires. L’application sauvegardant vos données est à la racine du dépôt.
+
+## Photos conservées sur votre serveur
+
+Version 0.3 : **Gérer les photos** copie les visuels avec leur provenance dans la collection partagée. Les fiches permettent aussi d’importer un fichier local. Les PNG transparents sont reconnus et les cadres de présentation sont homogènes, sans retouche de la montre. Voir [le guide photos](docs/photos.md) pour la mise à jour et la copie en lot.

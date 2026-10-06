@@ -4,3 +4,6 @@ test-results/
 *.log
 
 .collection-data/
+.env
+.env.*
+!.env.example
