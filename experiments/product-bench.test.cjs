@@ -1,0 +1,11 @@
+const assert=require('node:assert/strict');const {analyze}=require('./product-bench.cjs');
+const script=o=>'<script type="application/ld+json">'+JSON.stringify(o)+'</script>';
+const a=analyze(script({'@graph':[{'@type':'Product',name:'Synthetic EU',sku:'REF-EU',image:['https://example.com/watch.png'],offers:{price:'250',priceCurrency:'EUR'},additionalProperty:[{name:'Case diameter',value:38,unitText:'mm'},{name:'Water resistance',value:'10 bar'}]}]}),'https://example.com/product');
+assert.equal(a.candidates[0].fields.diameter.value,'38 mm');assert.equal(a.candidates[0].fields.price.value,'250 EUR');assert(a.candidates[0].missing.includes('lugToLug'));
+const b=analyze(script({'@type':'ProductGroup',hasVariant:[{'@type':'Product',sku:'A',name:'Japan A',additionalProperty:{name:'厚さ',value:10,unitText:'mm'}},{'@type':'Product',sku:'B',name:'Japan B'}]}),'https://example.com');
+assert.equal(b.productGroups,1);assert.equal(b.candidates.length,2);assert.equal(b.requiresProductSelection,true);assert.equal(b.candidates[0].fields.thickness.value,'10 mm');assert.equal(b.candidates[1].fields.thickness,undefined);
+const c=analyze('<meta content="Title &amp; text" property="og:title"><meta property="og:image" content="/image.jpg"><script type="application/ld+json">broken</script>','https://example.com');
+assert.equal(c.metadata.ogTitle,'Title & text');assert.equal(c.candidates.length,0);assert.equal(c.parseErrors.length,1);
+const d=analyze(script({'@type':'Product',name:'Synthetic microbrand',description:'38 mm diameter, sapphire glass'}),'https://example.com');
+assert.equal(d.candidates[0].fields.diameter,undefined);assert.equal(d.candidates[0].fields.crystal,undefined);
+console.log('Banc d’essai : 4 cas synthétiques validés (pas des mesures de sites réels).');

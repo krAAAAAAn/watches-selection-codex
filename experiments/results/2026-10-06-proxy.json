@@ -1,0 +1,30 @@
+[
+  {
+    "url": "https://www.seikowatches.com/fr-fr/products/5sports/srpg35",
+    "error": "<urlopen error Tunnel connection failed: 403 Forbidden>"
+  },
+  {
+    "url": "https://www.seikowatches.com/jp-ja/products/seikoselection/sbtm329",
+    "error": "<urlopen error Tunnel connection failed: 403 Forbidden>"
+  },
+  {
+    "url": "https://store.seikowatches.com/products/sbtm321",
+    "error": "<urlopen error Tunnel connection failed: 403 Forbidden>"
+  },
+  {
+    "url": "https://citizenwatch.eu/en/p/nj0150-81z/",
+    "error": "<urlopen error Tunnel connection failed: 403 Forbidden>"
+  },
+  {
+    "url": "https://citizen.jp/shop/g/gNB1050-59A/",
+    "error": "<urlopen error Tunnel connection failed: 403 Forbidden>"
+  },
+  {
+    "url": "https://www.hamiltonwatch.com/en-int/h38525721-jazzmaster-thinline-auto.html",
+    "error": "<urlopen error Tunnel connection failed: 403 Forbidden>"
+  },
+  {
+    "url": "https://www.brew-watches.com/products/metric-retro-dial",
+    "error": "<urlopen error Tunnel connection failed: 403 Forbidden>"
+  }
+]

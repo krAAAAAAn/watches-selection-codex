@@ -1,0 +1,76 @@
+{
+  "date": "2026-10-06T09:26:48.297Z",
+  "mode": "direct-node-https",
+  "note": "Aucun changement de collection. Pas de contournement réseau. URL Brew candidate non vérifiée. Comparaison IA non exécutée.",
+  "fields": [
+    "name",
+    "reference",
+    "image",
+    "price",
+    "diameter",
+    "thickness",
+    "lugToLug",
+    "movement",
+    "powerReserve",
+    "waterResistance",
+    "crystal"
+  ],
+  "results": [
+    {
+      "id": "seiko-fr",
+      "label": "Seiko France SRPG35",
+      "url": "https://www.seikowatches.com/fr-fr/products/5sports/srpg35",
+      "status": "unavailable",
+      "durationMs": 9,
+      "error": "EAI_AGAIN"
+    },
+    {
+      "id": "seiko-jp",
+      "label": "Seiko Japon SBTM329",
+      "url": "https://www.seikowatches.com/jp-ja/products/seikoselection/sbtm329",
+      "status": "unavailable",
+      "durationMs": 5007,
+      "error": "EAI_AGAIN"
+    },
+    {
+      "id": "seiko-store",
+      "label": "Seiko boutique Japon SBTM321",
+      "url": "https://store.seikowatches.com/products/sbtm321",
+      "status": "unavailable",
+      "durationMs": 5007,
+      "error": "EAI_AGAIN"
+    },
+    {
+      "id": "citizen-eu",
+      "label": "Citizen EU NJ0150-81Z",
+      "url": "https://citizenwatch.eu/en/p/nj0150-81z/",
+      "status": "unavailable",
+      "durationMs": 10011,
+      "error": "EAI_AGAIN"
+    },
+    {
+      "id": "citizen-jp",
+      "label": "Citizen Japon NB1050-59A",
+      "url": "https://citizen.jp/shop/g/gNB1050-59A/",
+      "status": "unavailable",
+      "durationMs": 10011,
+      "error": "EAI_AGAIN"
+    },
+    {
+      "id": "hamilton",
+      "label": "Hamilton H38525721",
+      "url": "https://www.hamiltonwatch.com/en-int/h38525721-jazzmaster-thinline-auto.html",
+      "status": "unavailable",
+      "durationMs": 10013,
+      "error": "EAI_AGAIN"
+    },
+    {
+      "id": "brew",
+      "label": "Brew Metric (page candidate à vérifier)",
+      "url": "https://www.brew-watches.com/products/metric-retro-dial",
+      "status": "unavailable",
+      "durationMs": 15018,
+      "error": "EAI_AGAIN"
+    }
+  ]
+}

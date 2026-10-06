@@ -57,6 +57,8 @@ Les tests vérifient la persistance après rechargement, l’édition, l’ajout
 
 ## Documentation
 
+- [Banc d’essai de l’import : résultats, limites et comparaison envisagée avec l’IA](docs/banc-essai-import.md)
+
 - [Déploiement homelab et synchronisation](docs/homelab.md)
 - [Version 0.2 : formulaire et sauvegarde partagée](docs/version-0.2.md)
 - [Version 0.1 et choix techniques](docs/version-0.1.md)
