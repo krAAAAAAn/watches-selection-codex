@@ -27,3 +27,7 @@ La route de téléchargement exige une connexion. Elle accepte seulement HTTPS v
 Tests effectués : copie intégrée et provenance sauvegardées, conservation des octets, rechargement sans site tiers, import local, refus d’une image invalide, export et lecture depuis un second navigateur. Les tests de téléchargement positif utilisent une source contrôlée ; les règles d’adresses privées et la reconnaissance des fichiers sont également vérifiées.
 
 Dans l’environnement cloud, le téléchargement constructeur Seiko a échoué avec une erreur DNS `EAI_AGAIN`. Les 41 fiches n’ont donc pas été annoncées comme téléchargées ici. La commande en lot doit être lancée sur votre homelab, où l’application montrera les réussites et les échecs réels.
+
+## Détourage facultatif — version 0.6
+
+Sur la fiche, sélectionnez une photo puis **Détourer cette photo**. Un traitement local retire le fond clair et uni et propose un cadrage. Validez l’aperçu pour enregistrer le PNG transparent avec son original ; **Retirer le détourage** revient à l’image source. Les photos sur fond complexe nécessitent un fichier PNG déjà détouré. Voir [le guide de présentation](presentation.md), avec la capture réelle et les limites. Aucune dépendance de serveur ni aucun appel IA supplémentaire.

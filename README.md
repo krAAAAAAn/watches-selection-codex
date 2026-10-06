@@ -57,6 +57,8 @@ Les tests vérifient la persistance après rechargement, l’édition, l’ajout
 
 ## Documentation
 
+- [Version 0.6 : favicon, mode clair et détourage des photos](docs/presentation.md)
+
 - [Version 0.5 : import par URL et configuration du fournisseur IA facultatif](docs/import-ia.md)
 
 - [Banc d’essai de l’import : résultats, limites et comparaison envisagée avec l’IA](docs/banc-essai-import.md)
@@ -80,3 +82,7 @@ Version 0.4 : statuts possédée/souhaitée/écartée, archives réversibles, su
 Version 0.5 : analyse simple des fiches produit, proposition avec sources et validation manuelle. Pour activer l’enrichissement IA, configurez `AI_ENDPOINT` (URL complète Chat Completions), `AI_MODEL` et éventuellement `AI_API_KEY` dans l’environnement du serveur. Sans ces variables, le carnet reste utilisable et l’analyse simple ne fait aucun appel IA. Voir [la configuration et les limites](docs/import-ia.md).
 
 Version 0.5.1 : sur la fiche, choisissez une variante ou une photo, puis **Afficher dans ma collection** pour mémoriser son illustration. Le choix suit la sauvegarde partagée et les exports. Voir [le fonctionnement des variantes](docs/gestion.md).
+
+## Apparence et détourage
+
+Version 0.6 : favicon embarqué, mode clair/sombre mémorisé dans le navigateur, et **Détourer cette photo** sur la fiche. Le détourage local cible les fonds clairs et unis, avec aperçu à valider, original conservé et résultat partagé entre navigateurs. Il ne nécessite aucun service IA. Voir [le fonctionnement et les limites](docs/presentation.md).
