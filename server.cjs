@@ -89,6 +89,41 @@ function textSpecifications(text){
  const specs=[];for(const[label,values]of found){if(values.length===1)specs.push(values[0]);else warnings.push('Plusieurs valeurs pour « '+label+' » : vérifiez la fiche et complétez ce champ.');}
  return{specs,warnings};
 }
+// Small balanced-element reader for server-rendered product fields. It does
+// not execute scripts or load resources, and adds no production dependency.
+function productElements(html){
+ const source=html.replace(/<!--[^]*?-->/g,'').replace(/<(script|style|noscript)\b[^>]*>[^]*?<\/\1\s*>/gi,''),nodes=[],stack=[],voidTags=new Set(['area','base','br','col','embed','hr','img','input','link','meta','param','source','track','wbr']);
+ for(const match of source.matchAll(/<\/?([a-z][\w:-]*)\b(?:[^>"']|"[^"]*"|'[^']*')*>/gi)){
+  const tag=match[1].toLowerCase();if(match[0][1]==='/'){let index=stack.length-1;while(index>=0&&stack[index].tag!==tag)index--;if(index>=0){for(const node of stack.splice(index)){node.contentEnd=match.index;node.end=match.index+match[0].length;}}continue;}
+  const node={tag,attrs:htmlAttributes(match[0]),start:match.index,contentStart:match.index+match[0].length,contentEnd:match.index+match[0].length,end:match.index+match[0].length};nodes.push(node);if(nodes.length>50000||stack.length>256)throw Error('La structure de la fiche est trop complexe.');if(!voidTags.has(tag)&&!match[0].endsWith('/>'))stack.push(node);
+ }
+ const has=(node,name)=>(node.attrs.class||'').split(/\s+/).includes(name),inside=(node,parent)=>node.start>=parent.contentStart&&node.end<=parent.contentEnd;
+ const text=node=>{if(!node)return '';const excluded=nodes.filter(n=>inside(n,node)&&has(n,'technical-specifications-description')).sort((a,b)=>a.start-b.start);let position=node.contentStart,fragment='';for(const n of excluded){if(n.start<position)continue;fragment+=source.slice(position,n.start);position=n.end;}return productText(fragment+source.slice(position,node.contentEnd));};
+ return{source,nodes,has,inside,text};
+}
+function certinaProduct(html,url){
+ if(!/(^|\.)certina\.com$/i.test(new URL(url).hostname))return null;
+ const doc=productElements(html),{source,nodes,has,inside,text}=doc,articles=nodes.filter(n=>n.tag==='article'&&has(n,'watch')&&has(n,'page-title'));
+ if(articles.length!==1)return null;const article=articles[0],content=nodes.filter(n=>inside(n,article));
+ const field=name=>content.find(n=>has(n,'field--name-'+name));
+ const values=node=>{if(!node)return [];const items=content.filter(n=>inside(n,node)&&has(n,'field--item'));return [...new Set((items.length?items:[node]).map(text).map(cleanText).filter(Boolean))];};
+ const title=content.find(n=>has(n,'title-area')),model=title?productText(source.slice(title.contentStart,title.contentEnd)).split('\n')[0]:'';
+ const references=values(field('field-watch-reference'));if(references.length!==1)return null;const reference=references[0];
+ // A mismatched URL must never mix this watch with an alternate reference.
+ const slug=new URL(url).pathname.split('/').filter(Boolean).at(-1);if(/^c\d+$/i.test(slug)&&slug.toLowerCase()!==reference.replace(/[^a-z0-9]/gi,'').toLowerCase())throw Error('La référence affichée par Certina ne correspond pas à ce lien. Utilisez la fiche du modèle exact.');
+ const fields={
+  'Diamètre / largeur':'field-watch-diameter-3h-9h','Épaisseur':'field-watch-box-height','Corne à corne':'field-watch-lug-to-lug','Entrecorne':'field-watch-lugs',
+  'Boîtier':'field-watch-case-materials','Verre':'field-watch-glasses','Étanchéité':'field-watch-water-resistance','Poids':'field-watch-weight-net',
+  'Couleur du cadran':'field-watch-dial-colors','Énergie / mouvement':'field-watch-movement-types','Calibre':'field-watch-movement-model','Prix indicatif':'field-watch-prices',
+ };
+ const specs=[],warnings=[];for(const[label,key]of Object.entries(fields)){const node=field(key),items=values(node);if(!items.length)continue;if(['Diamètre / largeur','Épaisseur','Corne à corne','Entrecorne','Poids','Prix indicatif'].includes(label)&&!items.every(v=>/\d/.test(v)))continue;if(['Diamètre / largeur','Épaisseur','Corne à corne','Entrecorne','Poids','Prix indicatif','Calibre'].includes(label)&&items.length>1){warnings.push('Plusieurs valeurs Certina pour « '+label+' » : complétez ce champ manuellement.');continue;}const value=items.join(' · ');if(value.length<=350)specs.push({label,value,quote:text(node),source:'page'});}
+ const image=field('field-watch-main-image'),imageLink=image&&content.find(n=>inside(n,image)&&n.tag==='a'&&has(n,'photoswipe')),imageTag=image&&content.find(n=>inside(n,image)&&n.tag==='img');let photo='';for(const candidate of [imageTag?.attrs['data-src'],imageTag?.attrs.src,imageLink?.attrs.href]){if(!candidate)continue;try{const resolved=new URL(candidate,url).href;if(https(resolved)&&!/\.svg(?:\?|$)/i.test(resolved)){photo=resolved;break;}}catch{}}
+ // Certina's transformed links can reject a valid token; the public media
+ // original keeps the exact reference and avoids the image-service query.
+ if(photo){const media=new URL(photo);if(/(^|\.)certina\.com$/i.test(media.hostname)&&media.pathname.startsWith('/sites/default/files/maps-medias/')&&/\.(png|jpe?g|webp)$/i.test(media.pathname)&&[...media.searchParams.keys()].every(k=>['im','itok'].includes(k))){media.search='';photo=media.href;}}
+ const description=cleanText(text(field('field-collection-mkt-text'))).slice(0,5000),name=model?'Certina '+model:'';
+ return{name,reference,photo,description,specs,warnings,text:text(article)};
+}
 async function downloadProductPage(source,redirects=0){
  let u;try{u=new URL(source)}catch{throw Error('URL de fiche invalide.');}
  if(u.protocol!=='https:'||u.username||u.password||(u.port&&u.port!=='443')||redirects>4)throw Error('Utilisez une URL HTTPS publique sans identifiants.');
@@ -108,20 +143,20 @@ function extractProduct(html,url,productIndex){
  function walk(o,depth=0){if(!o||typeof o!=='object'||depth>30||products.length>100)return;if(Array.isArray(o)){o.forEach(v=>walk(v,depth+1));return;}if([].concat(o['@type']||[]).includes('Product'))products.push(o);for(const[k,v]of Object.entries(o))if(!['offers','additionalProperty'].includes(k))walk(v,depth+1);}
  for(const m of html.matchAll(/<script\b([^>]*)>([^]*?)<\/script\s*>/gi)){if(htmlAttributes(m[1]).type?.toLowerCase()!=='application/ld+json')continue;try{walk(JSON.parse(m[2].trim()))}catch{warnings.push('Certaines données structurées de la page sont illisibles.');}}
  for(const m of html.matchAll(/<meta\b[^>]*>/gi)){const a=htmlAttributes(m[0]);if(a.content)meta[a.property||a.name]=a.content;}
- const text=productText(html);if(/お探しのページは見つかりませんでした。|the page you requested was not found|page not found|cette page est introuvable/i.test(text))throw Error('Ce lien affiche une page introuvable. Utilisez une autre fiche ou la saisie manuelle.');
+ const adapted=products.length?null:certinaProduct(html,url);const text=adapted?.text||productText(html);if(/お探しのページは見つかりませんでした。|the page you requested was not found|page not found|cette page est introuvable/i.test(text))throw Error('Ce lien affiche une page introuvable. Utilisez une autre fiche ou la saisie manuelle.');
  const candidateNames=products.map((p,index)=>({index,name:cleanText(p.name).slice(0,250),reference:cleanText(p.mpn||p.sku).slice(0,250)}));
  if(products.length>1&&productIndex===undefined)return{selectionRequired:true,candidates:candidateNames,warnings:['Plusieurs produits figurent dans cette page. Choisissez la référence à analyser.'],sourceUrl:url};
  if(productIndex!==undefined&&(!Number.isInteger(productIndex)||productIndex<0||productIndex>=products.length))throw Error('Sélection de produit invalide.');
  const p=products[productIndex??0]||{};const title=cleanText((html.match(/<title\b[^>]*>([^]*?)<\/title>/i)||[])[1]);
- const name=cleanText(p.name||meta['og:title']||title).slice(0,250),reference=cleanText(p.mpn||p.sku).slice(0,250);
- const rawImage=[].concat(p.image||[])[0];let photo=typeof rawImage==='object'&&rawImage?rawImage.url||rawImage.contentUrl:rawImage;photo=photo||meta['og:image']||'';try{photo=new URL(photo,url).href;if(!https(photo))photo=''}catch{photo=''}
+ const name=cleanText(p.name||adapted?.name||meta['og:title']||title).slice(0,250),reference=cleanText(p.mpn||p.sku||adapted?.reference).slice(0,250);
+ const rawImage=[].concat(p.image||[])[0];let photo=typeof rawImage==='object'&&rawImage?rawImage.url||rawImage.contentUrl:rawImage;photo=photo||adapted?.photo||meta['og:image']||'';if(photo){try{photo=new URL(photo,url).href;if(!https(photo))photo=''}catch{photo=''}}
  const offer=[].concat(p.offers||[]).find(o=>o&&o.price!=null);const price=offer?cleanText(offer.price)+' '+cleanText(offer.priceCurrency):'';
- const derived=textSpecifications(text);warnings.push(...derived.warnings,'Vérifiez la référence, les dimensions, les unités et le marché avant de sauvegarder.');
- if(!products.length)warnings.push('Aucun produit structuré : le titre et l’image peuvent être des métadonnées générales du site.');
- if(reference&&!p.mpn)warnings.push('La référence provient du SKU de la boutique ; vérifiez la référence fabricant.');
+ const derived=adapted?{specs:adapted.specs,warnings:adapted.warnings}:textSpecifications(text);warnings.push(...derived.warnings,'Vérifiez la référence, les dimensions, les unités et le marché avant de sauvegarder.');
+ if(adapted)warnings.push('Informations lues dans les champs de la fiche Certina, sans exécution de JavaScript.');else if(!products.length)warnings.push('Aucun produit structuré : le titre et l’image peuvent être des métadonnées générales du site.');
+ if(p.sku&&!p.mpn)warnings.push('La référence provient du SKU de la boutique ; vérifiez la référence fabricant.');
  if(/past collection/i.test(text))warnings.push('Le site indique une ancienne collection : prix et disponibilité sont à vérifier.');
  const specs=derived.specs;for(const property of [].concat(p.additionalProperty||[])){if(!property||typeof property!=='object')continue;const key=cleanText(property.name).toLowerCase().replace(/[:：]$/,'');const label=Object.entries(IMPORT_ALIASES).find(([,names])=>names.includes(key))?.[0];const value=cleanText(property.value)+(property.unitText?' '+cleanText(property.unitText):'');if(label&&value.trim()&&value.length<=350){const spec={label,value:value.trim(),quote:cleanText(property.name)+' : '+value.trim(),source:'metadata'};const index=specs.findIndex(s=>s.label===label);if(index>=0)specs[index]=spec;else specs.push(spec);}}if(price)specs.push({label:'Prix indicatif',value:price.trim(),quote:price.trim(),source:'metadata'});
- const description=cleanText(p.description||meta.description||meta['og:description']).slice(0,5000);
+ const description=cleanText(p.description||adapted?.description||meta.description||meta['og:description']).slice(0,5000);
  return{sourceUrl:url,name,reference,photo,description,specs,roles:[],warnings,missing:IMPORT_LABELS.filter(label=>!specs.some(s=>s.label===label)),ai:{used:false},_text:text,_product:p};
 }
 function aiConfigured(config){try{const u=new URL(config?.endpoint);return !!config.model&&['http:','https:'].includes(u.protocol)&&!u.username&&!u.password}catch{return false;}}
@@ -141,7 +176,7 @@ async function analyzeProductAI(proposal,config){
  let accepted=0;for(const key of ['name','reference']){const f=parsed[key];if(!f)continue;if(!supported(f,250)||(key==='reference'&&!normalizeEvidence(f.quote).includes(normalizeEvidence(f.value)))){warnings.push('Une proposition IA non justifiée pour '+key+' a été ignorée.');continue;}if(key==='reference'&&proposal.reference&&f.value!==proposal.reference){warnings.push('La référence IA diffère de la référence structurée : elle n’a pas remplacé celle-ci.');continue;}proposal[key]=f.value.trim();accepted++;}
  const numericLabels=['Diamètre / largeur','Épaisseur','Corne à corne','Dimensions du boîtier','Réserve de marche','Étanchéité','Poids','Entrecorne','Prix indicatif'];
  const numbers=s=>(normalizeEvidence(s).replace(/(\d),(\d)/g,'$1.$2').match(/\d+(?:\.\d+)?/g)||[]).map(Number);
- const seen=new Set();for(const f of parsed.characteristics){const numericMismatch=f&&numericLabels.includes(f.label)&&typeof f.value==='string'&&typeof f.quote==='string'&&numbers(f.value).some(n=>!numbers(f.quote).includes(n));const unsupportedLength=f?.label==='Corne à corne'&&!/corne à corne|lug[ -]to[ -]lug/i.test(f.quote||'');if(!f||!IMPORT_LABELS.includes(f.label)||seen.has(f.label)||!supported(f,600)||numericMismatch||unsupportedLength){warnings.push('Une caractéristique IA sans extrait vérifiable ou hors format a été ignorée.');continue;}seen.add(f.label);if(f.label==='Prix indicatif'&&proposal.specs.some(s=>s.label===f.label&&s.source==='metadata'))continue;const spec={label:f.label,value:f.value.trim(),quote:f.quote,source:'ai'};const index=proposal.specs.findIndex(s=>s.label===f.label);if(index>=0)proposal.specs[index]=spec;else proposal.specs.push(spec);accepted++;}
+ const seen=new Set();for(const f of parsed.characteristics){const numericMismatch=f&&numericLabels.includes(f.label)&&typeof f.value==='string'&&typeof f.quote==='string'&&numbers(f.value).some(n=>!numbers(f.quote).includes(n));const unsupportedLength=f?.label==='Corne à corne'&&!/corne à corne|lug[ -]to[ -]lug/i.test(f.quote||'');if(!f||!IMPORT_LABELS.includes(f.label)||seen.has(f.label)||!supported(f,600)||numericMismatch||unsupportedLength){warnings.push('Une caractéristique IA sans extrait vérifiable ou hors format a été ignorée.');continue;}seen.add(f.label);if(f.label==='Prix indicatif'&&proposal.specs.some(s=>s.label===f.label&&['metadata','page'].includes(s.source)))continue;const spec={label:f.label,value:f.value.trim(),quote:f.quote,source:'ai'};const index=proposal.specs.findIndex(s=>s.label===f.label);if(index>=0)proposal.specs[index]=spec;else proposal.specs.push(spec);accepted++;}
  if(Array.isArray(parsed.roles))for(const r of parsed.roles.slice(0,8)){if(Number.isInteger(r?.role)&&r.role>=0&&r.role<8&&typeof r.quote==='string'&&r.quote.trim().length>=3&&r.quote.length<=1000&&normalizeEvidence(evidence).includes(normalizeEvidence(r.quote))&&!proposal.roles.includes(r.role))proposal.roles.push(r.role);}
  if(!accepted)throw Error('Aucune information IA suffisamment justifiée : proposition simple conservée.');
  proposal.warnings.push(...warnings,'Les extraits IA ont été retrouvés dans la source ; vérifiez aussi leur interprétation et le produit concerné.');proposal.ai={used:true};proposal.missing=IMPORT_LABELS.filter(label=>!proposal.specs.some(s=>s.label===label));return proposal;

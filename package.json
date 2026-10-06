@@ -1,11 +1,11 @@
 {
   "name": "watches-selection",
-  "version": "0.6.1",
+  "version": "0.6.2",
   "private": true,
   "description": "Carnet horloger autonome en un fichier HTML",
   "scripts": {
     "start": "node server.cjs",
-    "test": "node tests/app.cjs && node tests/sync.cjs && node tests/photos.cjs && node tests/management.cjs && node tests/product-import.cjs && node tests/collection-appearance.cjs && node tests/visuals.cjs && node tests/photo-limits.cjs"
+    "test": "node tests/app.cjs && node tests/sync.cjs && node tests/photos.cjs && node tests/management.cjs && node tests/product-import.cjs && node tests/collection-appearance.cjs && node tests/visuals.cjs && node tests/photo-limits.cjs && node tests/certina-import.cjs"
   },
   "engines": {
     "node": ">=20"

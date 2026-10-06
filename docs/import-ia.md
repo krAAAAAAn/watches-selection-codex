@@ -85,3 +85,7 @@ Le téléchargement des fiches utilise HTTPS avec validation TLS, contrôle des 
 La suite teste un **fournisseur compatible simulé**, avec de vraies requêtes HTTP : endpoint choisi, modèle, authentification Bearer, données privées exclues, extraits absents et nombres inventés rejetés, panne fournisseur, JSON invalide et redirection refusée. Elle vérifie aussi l’aperçu sans sauvegarde, la correction/validation, la provenance, un second navigateur, l’annulation, le mode sans IA, la sélection entre produits et l’affichage mobile. Les fonctions existantes de gestion et de synchronisation restent couvertes par leurs tests.
 
 Aucun fournisseur payant ni modèle local réel n’a été appelé : compatibilité et qualité avec votre modèle devront être vérifiées sur votre installation. Le [banc d’essai des sites réels](banc-essai-import.md) fournit des références pour cette vérification.
+
+## Correctif Certina — version 0.6.2
+
+Une lecture ciblée des champs Certina améliore aussi les imports sans IA : référence, dimensions, calibre, verre, prix du marché et photo originale. En mode IA, seules les informations de la montre affichée sont transmises, sans recommandations ni infobulles générales. Voir [le diagnostic et la mise à jour](import-certina.md).

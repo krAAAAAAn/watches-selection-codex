@@ -83,6 +83,10 @@ Version 0.5 : analyse simple des fiches produit, proposition avec sources et val
 
 Version 0.5.1 : sur la fiche, choisissez une variante ou une photo, puis **Afficher dans ma collection** pour mémoriser son illustration. Le choix suit la sauvegarde partagée et les exports. Voir [le fonctionnement des variantes](docs/gestion.md).
 
+## Import Certina
+
+Version 0.6.2 : lecture ciblée des champs Certina sans IA obligatoire, avec référence, dimensions, calibre, verre, prix du marché et photo originale. Les recommandations et les infobulles générales sont exclues. Depuis 0.6.1, seul `server.cjs` change côté application. Voir [le diagnostic et les résultats sur la DS-8](docs/import-certina.md).
+
 ## Correctifs de sauvegarde et détourage
 
 Version 0.6.1 : limite de collection portée à 100 Mo, brouillons partagés stockés dans IndexedDB, détourages plus légers et méthode par contours avec réglage des ombres, testée sur la Charlie Slim. Mettez à jour les **deux fichiers** applicatifs. Voir [le correctif et son aperçu réel](docs/correctifs-0.6.1.md).
