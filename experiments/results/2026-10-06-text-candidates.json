@@ -1,0 +1,437 @@
+{
+  "date": "2026-10-06T09:53:01.430744+00:00",
+  "method": "Libellés génériques multilingues dans le texte, aucun sélecteur par marque. Comparaison manuelle des candidats à six fiches. Aucun choix automatique entre candidats.",
+  "totals": {
+    "availableTechnicalFields": 35,
+    "fieldsWithCorrectUnambiguousCandidate": 32,
+    "compositeDimensionsToInterpret": 2,
+    "missed": 1
+  },
+  "caveats": [
+    "Un candidat correct présent peut côtoyer de faux candidats. Ce score ne mesure pas la précision d’un import automatique.",
+    "Le champ movement est compté correct si le calibre exact figure parmi les candidats ; type et calibre ne sont pas normalisés.",
+    "Hamilton thickness 8.45 a son unité mm dans le libellé.",
+    "Pour Seiko SBTM321, 縦 46.1mm reste une dimension verticale brute, pas une valeur automatiquement certifiée corne à corne.",
+    "Pour Brew, 36MM x 41.5MM est une dimension composite ; ne pas remplir corne à corne depuis ce seul libellé.",
+    "Absent signifie absent du HTML téléchargé examiné, pas nécessairement absent de toute source existante."
+  ],
+  "results": [
+    {
+      "id": "seiko-fr",
+      "referenceManuelle": {
+        "diameter": "39.4mm",
+        "thickness": "13.2mm",
+        "lugToLug": "48.1mm",
+        "movement": "4R36",
+        "powerReserve": "Environ 41 heures",
+        "waterResistance": "10 bar",
+        "crystal": "Hardlex bombé"
+      },
+      "candidates": {
+        "movement": [
+          {
+            "value": "Dimensions du boîtier",
+            "quote": "Mouvement Dimensions du boîtier",
+            "line": 19
+          },
+          {
+            "value": "Numéro du calibre",
+            "quote": "Mouvement Numéro du calibre",
+            "line": 125
+          },
+          {
+            "value": "4R36",
+            "quote": "Numéro du calibre 4R36",
+            "line": 126
+          },
+          {
+            "value": "Automatique avec fonction de remontage manuel",
+            "quote": "Type de mouvement Automatique avec fonction de remontage manuel",
+            "line": 128
+          }
+        ],
+        "powerReserve": [
+          {
+            "value": "Environ 41 heures",
+            "quote": "Autonomie Environ 41 heures",
+            "line": 130
+          }
+        ],
+        "thickness": [
+          {
+            "value": "13.2mm",
+            "quote": "Épaisseur 13.2mm",
+            "line": 141
+          }
+        ],
+        "diameter": [
+          {
+            "value": "39.4mm",
+            "quote": "Diamètre 39.4mm",
+            "line": 142
+          }
+        ],
+        "lugToLug": [
+          {
+            "value": "48.1mm",
+            "quote": "Corne à corne 48.1mm",
+            "line": 143
+          }
+        ],
+        "crystal": [
+          {
+            "value": "Hardlex bombé",
+            "quote": "Composition du verre Hardlex bombé",
+            "line": 144
+          }
+        ],
+        "waterResistance": [
+          {
+            "value": "10 bar",
+            "quote": "Étanchéité 10 bar",
+            "line": 153
+          }
+        ]
+      },
+      "assessment": {
+        "diameter": "candidat-correct-présent",
+        "thickness": "candidat-correct-présent",
+        "lugToLug": "candidat-correct-présent",
+        "movement": "candidat-correct-présent",
+        "powerReserve": "candidat-correct-présent",
+        "waterResistance": "candidat-correct-présent",
+        "crystal": "candidat-correct-présent"
+      }
+    },
+    {
+      "id": "seiko-store",
+      "referenceManuelle": {
+        "diameter": "厚さ:9.5mm 横:39.5mm 縦:46.1mm",
+        "thickness": "9.5mm",
+        "movement": "7B72",
+        "powerReserve": "フル充電時約9ヶ月間 パワーセーブ時約2年",
+        "waterResistance": "日常生活用強化防水（10気圧）",
+        "crystal": "サファイア"
+      },
+      "candidates": {
+        "movement": [
+          {
+            "value": "キャリバーNo 7B72",
+            "quote": "Movement キャリバーNo 7B72",
+            "line": 144
+          },
+          {
+            "value": "7B72",
+            "quote": "キャリバーno 7B72",
+            "line": 145
+          },
+          {
+            "value": "ソーラー電波修正",
+            "quote": "駆動方式 ソーラー電波修正",
+            "line": 146
+          }
+        ],
+        "powerReserve": [
+          {
+            "value": "フル充電時約9ヶ月間 パワーセーブ時約2年",
+            "quote": "駆動期間 フル充電時約9ヶ月間 パワーセーブ時約2年",
+            "line": 148
+          }
+        ],
+        "diameter": [
+          {
+            "value": "厚さ:9.5mm 横:39.5mm 縦:46.1mm",
+            "quote": "ケースサイズ 厚さ:9.5mm 横:39.5mm 縦:46.1mm",
+            "line": 161
+          }
+        ],
+        "crystal": [
+          {
+            "value": "サファイア",
+            "quote": "ガラス材質 サファイア",
+            "line": 162
+          }
+        ],
+        "waterResistance": [
+          {
+            "value": "日常生活用強化防水（10気圧）",
+            "quote": "防水 日常生活用強化防水（10気圧）",
+            "line": 168
+          },
+          {
+            "value": "機能",
+            "quote": "防水 機能",
+            "line": 253
+          }
+        ]
+      },
+      "assessment": {
+        "diameter": "dimension-composite-à-interpréter",
+        "thickness": "non-extrait",
+        "movement": "candidat-correct-présent",
+        "powerReserve": "candidat-correct-présent",
+        "waterResistance": "candidat-correct-présent",
+        "crystal": "candidat-correct-présent"
+      }
+    },
+    {
+      "id": "citizen-eu",
+      "referenceManuelle": {
+        "diameter": "40 mm",
+        "movement": "8210",
+        "powerReserve": "40 hours",
+        "waterResistance": "5 bar",
+        "crystal": "Sapphire glass"
+      },
+      "candidates": {
+        "movement": [
+          {
+            "value": "Automatic",
+            "quote": "Movement: Automatic",
+            "line": 95
+          },
+          {
+            "value": "8210",
+            "quote": "Caliber: 8210",
+            "line": 97
+          }
+        ],
+        "powerReserve": [
+          {
+            "value": "40 hours",
+            "quote": "Power Reserve: 40 hours",
+            "line": 106
+          }
+        ],
+        "crystal": [
+          {
+            "value": "Sapphire glass",
+            "quote": "Glas: Sapphire glass",
+            "line": 112
+          }
+        ],
+        "waterResistance": [
+          {
+            "value": "5 bar",
+            "quote": "Water Resistant: 5 bar",
+            "line": 120
+          }
+        ],
+        "diameter": [
+          {
+            "value": "40 mm",
+            "quote": "Diameter (X-axis): 40 mm",
+            "line": 122
+          }
+        ]
+      },
+      "assessment": {
+        "diameter": "candidat-correct-présent",
+        "movement": "candidat-correct-présent",
+        "powerReserve": "candidat-correct-présent",
+        "waterResistance": "candidat-correct-présent",
+        "crystal": "candidat-correct-présent"
+      }
+    },
+    {
+      "id": "citizen-jp",
+      "referenceManuelle": {
+        "diameter": "横 38.0mm",
+        "thickness": "10.5mm",
+        "movement": "9011",
+        "powerReserve": "約42時間(最大巻上時)",
+        "waterResistance": "10気圧防水",
+        "crystal": "サファイアガラス（無反射コーティング）"
+      },
+      "candidates": {
+        "movement": [
+          {
+            "value": "9011",
+            "quote": "キャリバーNo. 9011",
+            "line": 100
+          },
+          {
+            "value": "機械式(自動巻き＋手巻き)",
+            "quote": "動力 機械式(自動巻き＋手巻き)",
+            "line": 102
+          }
+        ],
+        "powerReserve": [
+          {
+            "value": "約42時間(最大巻上時)",
+            "quote": "持続時間 約42時間(最大巻上時)",
+            "line": 106
+          }
+        ],
+        "thickness": [
+          {
+            "value": "10.5mm",
+            "quote": "厚み 10.5mm",
+            "line": 110
+          }
+        ],
+        "diameter": [
+          {
+            "value": "横 38.0mm",
+            "quote": "ケースサイズ 横 38.0mm",
+            "line": 112
+          },
+          {
+            "value": "ケースサイズは、りゅうず、および、りゅうずガードを含まない横幅の寸法(設定値)となっております。",
+            "quote": "ケースサイズ ケースサイズは、りゅうず、および、りゅうずガードを含まない横幅の寸法(設定値)となっております。",
+            "line": 114
+          }
+        ],
+        "crystal": [
+          {
+            "value": "サファイアガラス（無反射コーティング）",
+            "quote": "ガラス サファイアガラス（無反射コーティング）",
+            "line": 129
+          }
+        ],
+        "waterResistance": [
+          {
+            "value": "10気圧防水",
+            "quote": "防水性能 10気圧防水",
+            "line": 131
+          }
+        ]
+      },
+      "assessment": {
+        "diameter": "candidat-correct-présent",
+        "thickness": "candidat-correct-présent",
+        "movement": "candidat-correct-présent",
+        "powerReserve": "candidat-correct-présent",
+        "waterResistance": "candidat-correct-présent",
+        "crystal": "candidat-correct-présent"
+      }
+    },
+    {
+      "id": "hamilton",
+      "referenceManuelle": {
+        "diameter": "40mm",
+        "thickness": "8.45",
+        "movement": "2892-A2",
+        "powerReserve": "42 hour",
+        "waterResistance": "5 bar (50m)",
+        "crystal": "Sapphire"
+      },
+      "candidates": {
+        "movement": [
+          {
+            "value": "2892-A2",
+            "quote": "Caliber 2892-A2",
+            "line": 79
+          },
+          {
+            "value": "Automatic",
+            "quote": "Movement Automatic",
+            "line": 83
+          }
+        ],
+        "diameter": [
+          {
+            "value": "40mm",
+            "quote": "Case size 40mm",
+            "line": 85
+          }
+        ],
+        "thickness": [
+          {
+            "value": "8.45",
+            "quote": "Thickness (mm) 8.45",
+            "line": 87
+          }
+        ],
+        "crystal": [
+          {
+            "value": "Sapphire",
+            "quote": "Crystal Sapphire",
+            "line": 93
+          }
+        ],
+        "powerReserve": [
+          {
+            "value": "42 hour",
+            "quote": "Power reserve 42 hour",
+            "line": 97
+          }
+        ],
+        "waterResistance": [
+          {
+            "value": "5 bar (50m)",
+            "quote": "Water Resistance 5 bar (50m)",
+            "line": 101
+          },
+          {
+            "value": "Your timepiece is resistant up to 5 bar (50m) / 73 psi (164 ft).",
+            "quote": "WATER RESISTANCE Your timepiece is resistant up to 5 bar (50m) / 73 psi (164 ft).",
+            "line": 125
+          }
+        ]
+      },
+      "assessment": {
+        "diameter": "candidat-correct-présent",
+        "thickness": "candidat-correct-présent",
+        "movement": "candidat-correct-présent",
+        "powerReserve": "candidat-correct-présent",
+        "waterResistance": "candidat-correct-présent",
+        "crystal": "candidat-correct-présent"
+      }
+    },
+    {
+      "id": "brew",
+      "referenceManuelle": {
+        "diameter": "36MM x 41.5MM",
+        "thickness": "10.75MM",
+        "movement": "HYBRID VK68 MECA-QUARTZ CHRONOGRAPH",
+        "waterResistance": "5ATM (50 METERS)",
+        "crystal": "SAPPHIRE GLASS"
+      },
+      "candidates": {
+        "diameter": [
+          {
+            "value": "36MM x 41.5MM",
+            "quote": "CASE DIAMETER 36MM x 41.5MM",
+            "line": 363
+          }
+        ],
+        "thickness": [
+          {
+            "value": "10.75MM",
+            "quote": "CASE THICKNESS 10.75MM",
+            "line": 364
+          }
+        ],
+        "crystal": [
+          {
+            "value": "SAPPHIRE GLASS",
+            "quote": "CRYSTAL SAPPHIRE GLASS",
+            "line": 366
+          }
+        ],
+        "waterResistance": [
+          {
+            "value": "5ATM (50 METERS)",
+            "quote": "WATER RESISTANCE 5ATM (50 METERS)",
+            "line": 372
+          }
+        ],
+        "movement": [
+          {
+            "value": "HYBRID VK68 MECA-QUARTZ CHRONOGRAPH",
+            "quote": "MOVEMENT HYBRID VK68 MECA-QUARTZ CHRONOGRAPH",
+            "line": 373
+          }
+        ]
+      },
+      "assessment": {
+        "diameter": "dimension-composite-à-interpréter",
+        "thickness": "candidat-correct-présent",
+        "movement": "candidat-correct-présent",
+        "waterResistance": "candidat-correct-présent",
+        "crystal": "candidat-correct-présent"
+      }
+    }
+  ]
+}

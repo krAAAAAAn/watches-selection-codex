@@ -11,7 +11,7 @@ const samples = [
  ['citizen-eu','Citizen EU NJ0150-81Z','https://citizenwatch.eu/en/p/nj0150-81z/'],
  ['citizen-jp','Citizen Japon NB1050-59A','https://citizen.jp/shop/g/gNB1050-59A/'],
  ['hamilton','Hamilton H38525721','https://www.hamiltonwatch.com/en-int/h38525721-jazzmaster-thinline-auto.html'],
- ['brew','Brew Metric (page candidate à vérifier)','https://www.brew-watches.com/products/metric-retro-dial'],
+ ['brew','Brew Metric Retro Dial / METRIC-BLK','https://www.brew-watches.com/products/brew-metric-retro-black'],
 ];
 const fields = ['name','reference','image','price','diameter','thickness','lugToLug','movement','powerReserve','waterResistance','crystal'];
 function text(v) { return typeof v === 'string' || typeof v === 'number' ? String(v).replace(/<[^>]*>/g,' ').replace(/\s+/g,' ').trim() : ''; }
@@ -35,7 +35,9 @@ function analyze(html,url) {
   for(const prop of [].concat(p.additionalProperty||[]))for(const [field,pattern]of Object.entries(mapping))if(pattern.test(text(prop?.name)))set(field,text(prop.value)+(prop.unitText?' '+prop.unitText:''),'JSON-LD additionalProperty: '+prop.name);
   return {index,fields:extracted,missing:fields.filter(f=>!extracted[f]),description:text(p.description),url:text(p.url)};
  });
- return {url,jsonLdScripts:scripts,parseErrors:errors,productGroups:groups.length,candidates,metadata:{title,ogTitle:meta['og:title']||'',ogImage:meta['og:image']||'',description:meta.description||meta['og:description']||''},requiresProductSelection:products.length>1,accuracy:'Non évaluée : nécessite comparaison manuelle à la fiche. Présence de données ≠ exactitude.'};
+ const content=text(decode(html.replace(/<script\b[^>]*>[\s\S]*?<\/script\s*>|<style\b[^>]*>[\s\S]*?<\/style\s*>/gi,'')));
+ const pageWarning=/お探しのページは見つかりませんでした。|the page you requested was not found|page not found/i.test(content)?'Page introuvable dans le contenu : HTTP 200 ne garantit pas une fiche produit.':null;
+ return {url,pageWarning,jsonLdScripts:scripts,parseErrors:errors,productGroups:groups.length,candidates,metadata:{title,ogTitle:meta['og:title']||'',ogImage:meta['og:image']||'',description:meta.description||meta['og:description']||''},requiresProductSelection:products.length>1,accuracy:'Non évaluée : nécessite comparaison manuelle à la fiche. Présence de données ≠ exactitude.'};
 }
 async function download(source,redirects=0) {
  const u=new URL(source);if(u.protocol!=='https:'||u.username||u.password||(u.port&&u.port!=='443')||redirects>4)throw Error('URL HTTPS publique requise');
@@ -55,7 +57,7 @@ async function main() {
  const results=await Promise.all(samples.map(async([id,label,url])=>{
   const start=Date.now();try{const page=input?{html:await fs.readFile(path.join(input,id+'.html'),'utf8'),finalUrl:url}:await download(url);if(save){await fs.mkdir(save,{recursive:true});await fs.writeFile(path.join(save,id+'.html'),page.html)}return{id,label,status:input?'local-snapshot':'downloaded',durationMs:Date.now()-start,...analyze(page.html,page.finalUrl)}}catch(e){return{id,label,url,status:'unavailable',durationMs:Date.now()-start,error:e.code||e.message}}
  }));
- const report={date:new Date().toISOString(),mode:input?'local-snapshots':'direct-node-https',note:'Aucun changement de collection. Pas de contournement réseau. URL Brew candidate non vérifiée. Comparaison IA non exécutée.',fields,results};await fs.writeFile(output,JSON.stringify(report,null,2)+'\n');
+ const report={date:new Date().toISOString(),mode:input?'local-snapshots':'direct-node-https',note:'Aucun changement de collection. Pas de contournement réseau. URL Brew corrigée après vérification du site. Comparaison IA non exécutée.',fields,results};await fs.writeFile(output,JSON.stringify(report,null,2)+'\n');
  for(const r of results)console.log(r.id+': '+r.status+(r.error?' — '+r.error:' — '+r.candidates.length+' Product, champs: '+r.candidates.map(c=>Object.keys(c.fields).length+'/'+fields.length).join(', ')));console.log('Rapport : '+output);
 }
 module.exports={analyze,download,samples};if(require.main===module)main().catch(e=>{console.error(e.message);process.exitCode=1});

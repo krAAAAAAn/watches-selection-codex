@@ -8,4 +8,13 @@ const c=analyze('<meta content="Title &amp; text" property="og:title"><meta prop
 assert.equal(c.metadata.ogTitle,'Title & text');assert.equal(c.candidates.length,0);assert.equal(c.parseErrors.length,1);
 const d=analyze(script({'@type':'Product',name:'Synthetic microbrand',description:'38 mm diameter, sapphire glass'}),'https://example.com');
 assert.equal(d.candidates[0].fields.diameter,undefined);assert.equal(d.candidates[0].fields.crystal,undefined);
-console.log('Banc d’essai : 4 cas synthétiques validés (pas des mesures de sites réels).');
+assert(analyze('<h1>お探しのページは見つかりませんでした。</h1>','https://example.com').pageWarning);
+assert.equal(a.pageWarning,null);
+console.log('Banc d’essai : 5 cas synthétiques validés (pas des mesures de sites réels).');
+const {candidates}=require('./text-candidates.cjs');
+const labels=candidates('<dt>Thickness (mm)</dt><dd>8.45</dd><p>CASE DIAMETER: 36MM x 41.5MM<br>CRYSTAL: SAPPHIRE GLASS</p><p>&#201;paisseur:13.2mm</p>');
+assert.equal(labels.thickness[0].value,'8.45');assert.equal(labels.thickness[1].value,'13.2mm');
+assert.equal(labels.diameter[0].value,'36MM x 41.5MM');assert.equal(labels.lugToLug,undefined);
+assert.equal(labels.crystal[0].value,'SAPPHIRE GLASS');
+assert.equal(candidates('<script>CASE DIAMETER: 999mm</script>').diameter,undefined);
+console.log('Passe texte : unités de libellé, dimensions composites et scripts exclus validés.');

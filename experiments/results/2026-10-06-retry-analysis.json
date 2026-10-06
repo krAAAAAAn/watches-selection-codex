@@ -1,0 +1,395 @@
+{
+  "date": "2026-10-06T09:50:48.621Z",
+  "mode": "proxy-downloads-analyzed-as-local-snapshots",
+  "note": "Six fiches produit et une page introuvable servie HTTP 200. HTML téléchargé via proxy configuré (urllib.request), puis analysé sans exécution JavaScript. URL Brew corrigée depuis les liens de sa page d’accueil. Comparaison IA non exécutée.",
+  "fields": [
+    "name",
+    "reference",
+    "image",
+    "price",
+    "diameter",
+    "thickness",
+    "lugToLug",
+    "movement",
+    "powerReserve",
+    "waterResistance",
+    "crystal"
+  ],
+  "results": [
+    {
+      "id": "seiko-fr",
+      "label": "Seiko France SRPG35",
+      "status": "local-snapshot",
+      "durationMs": 7,
+      "url": "https://www.seikowatches.com/fr-fr/products/5sports/srpg35",
+      "pageWarning": null,
+      "jsonLdScripts": 0,
+      "parseErrors": [],
+      "productGroups": 0,
+      "candidates": [],
+      "metadata": {
+        "title": "SRPG35 | Seiko Watch Corporation",
+        "ogTitle": "SRPG35 | Seiko Watch Corporation",
+        "ogImage": "https://www.seikowatches.com/fr-fr/-/media/Images/Product--Image/All/Seiko/2022/02/20/02/38/SRPG35K1/SRPG35K1.png",
+        "description": "Seiko fait partie des rares manufactures horlogères entièrement intégrées. Nous concevons et développons nos propres mouvements en utilisant des technologies de pointe."
+      },
+      "requiresProductSelection": false,
+      "accuracy": "Non évaluée : nécessite comparaison manuelle à la fiche. Présence de données ≠ exactitude.",
+      "access": {
+        "id": "seiko-fr",
+        "url": "https://www.seikowatches.com/fr-fr/products/5sports/srpg35",
+        "finalUrl": "https://www.seikowatches.com/fr-fr/products/5sports/srpg35",
+        "status": 200,
+        "bytes": 88994,
+        "contentType": "text/html; charset=utf-8",
+        "encoding": "utf-8"
+      },
+      "snapshotSha256": "3598d32fd102d9b04489bdb82d3aeedbbc28af9c61affe3cd6ad6bf1309cba4a"
+    },
+    {
+      "id": "seiko-jp",
+      "label": "Seiko Japon SBTM329",
+      "status": "local-snapshot",
+      "durationMs": 9,
+      "url": "https://www.seikowatches.com/jp-ja/products/seikoselection/sbtm329",
+      "pageWarning": "Page introuvable dans le contenu : HTTP 200 ne garantit pas une fiche produit.",
+      "jsonLdScripts": 0,
+      "parseErrors": [],
+      "productGroups": 0,
+      "candidates": [],
+      "metadata": {
+        "title": "Seiko Watch Corporation",
+        "ogTitle": "Seiko Watch Corporation",
+        "ogImage": "https://www.seikowatches.com/jp-ja/-/media/Images/GlobalEn/Seiko/Home/common/SeikoLogo/ThumbnailSeikoLogo.jpg",
+        "description": "セイコーウオッチの公式WEBサイト。セイコーは常に時代の一歩先を行く腕時計をつくってきました。グランドセイコー、アストロン、ルキアなどをはじめ多様なラインアップをご用意しています。"
+      },
+      "requiresProductSelection": false,
+      "accuracy": "Non évaluée : nécessite comparaison manuelle à la fiche. Présence de données ≠ exactitude.",
+      "access": {
+        "id": "seiko-jp",
+        "url": "https://www.seikowatches.com/jp-ja/products/seikoselection/sbtm329",
+        "finalUrl": "https://www.seikowatches.com/jp-ja/products/seikoselection/sbtm329",
+        "status": 200,
+        "bytes": 81876,
+        "contentType": "text/html; charset=utf-8",
+        "encoding": "utf-8"
+      },
+      "snapshotSha256": "f2d15d9e2dfe3af3a5cc361c23c7673cc7345c44ecd8186ec4cc1ea9cfe8c129"
+    },
+    {
+      "id": "seiko-store",
+      "label": "Seiko boutique Japon SBTM321",
+      "status": "local-snapshot",
+      "durationMs": 21,
+      "url": "https://store.seikowatches.com/products/sbtm321",
+      "pageWarning": null,
+      "jsonLdScripts": 2,
+      "parseErrors": [],
+      "productGroups": 0,
+      "candidates": [
+        {
+          "index": 0,
+          "fields": {
+            "name": {
+              "value": "SBTM321",
+              "source": "JSON-LD Product.name"
+            },
+            "reference": {
+              "value": "SBTM321",
+              "source": "JSON-LD Product.mpn/sku"
+            },
+            "image": {
+              "value": "https://store.seikowatches.com/cdn/shop/files/SBTM321_1024x1024.png?v=1701741539",
+              "source": "JSON-LD Product.image"
+            },
+            "price": {
+              "value": "55000 JPY",
+              "source": "JSON-LD Product.offers (prix source, devise non convertie)"
+            }
+          },
+          "missing": [
+            "diameter",
+            "thickness",
+            "lugToLug",
+            "movement",
+            "powerReserve",
+            "waterResistance",
+            "crystal"
+          ],
+          "description": "流行に左右されない、スタンダードなデザインに特化したSシリーズが登場広めのダイヤルに夜間でも時刻が分かりやすいルミブライトつきの、視認性に優れたソーラー電波モデル。ケースの側面やかん足部分に段差や面を付けた事で、傾けたときにキラリと光り上質感を演出。ダイヤルの立体的なインデックスは視認性に優れているだけではなくキリッとした印象を表現。ガラスは、スーパークリアコーティングを施したサファイアガラスを使用。デザイン性だけでなく、JISⅠ種の耐磁性能も搭載した、充実のスペックです。",
+          "url": "https://store.seikowatches.com/products/sbtm321"
+        }
+      ],
+      "metadata": {
+        "title": "SBTM321 &ndash; セイコーセレクション &ndash; セイコーオンラインストア &vert; 時計・腕時計のSEIKO",
+        "ogTitle": "SBTM321",
+        "ogImage": "http://store.seikowatches.com/cdn/shop/files/SBTM321.png?v=1701741539",
+        "description": "流行に左右されない、スタンダードなデザインに特化したSシリーズが登場広めのダイヤルに夜間でも時刻が分かりやすいルミブライトつきの、視認性に優れたソーラー電波モデル。ケースの側面やかん足部分に段差や面を付けた事で、傾けたときにキラリと光り上質感を演出。ダイヤルの立体的なインデックスは視認性に優れているだけではなくキリッとした印象を表現。ガラスは、スーパークリアコーティングを施したサファイアガラスを使用。デザイン性だけでなく、JISⅠ種の耐磁性能も搭載した、充実のスペックです。"
+      },
+      "requiresProductSelection": false,
+      "accuracy": "Non évaluée : nécessite comparaison manuelle à la fiche. Présence de données ≠ exactitude.",
+      "access": {
+        "id": "seiko-store",
+        "url": "https://store.seikowatches.com/products/sbtm321",
+        "finalUrl": "https://store.seikowatches.com/products/sbtm321",
+        "status": 200,
+        "bytes": 872620,
+        "contentType": "text/html; charset=utf-8",
+        "encoding": "utf-8"
+      },
+      "snapshotSha256": "bc828d992d90aea011d7af6efed54e7b40608d6b66949bf5e48be3e264f352e9"
+    },
+    {
+      "id": "citizen-eu",
+      "label": "Citizen EU NJ0150-81Z",
+      "status": "local-snapshot",
+      "durationMs": 12,
+      "url": "https://citizenwatch.eu/en/p/nj0150-81z/",
+      "pageWarning": null,
+      "jsonLdScripts": 7,
+      "parseErrors": [],
+      "productGroups": 0,
+      "candidates": [
+        {
+          "index": 0,
+          "fields": {
+            "name": {
+              "value": "NJ0150-81Z",
+              "source": "JSON-LD Product.name"
+            },
+            "reference": {
+              "value": "NJ0150-81Z",
+              "source": "JSON-LD Product.mpn/sku"
+            },
+            "image": {
+              "value": "https://citizenwatch.eu/media/thumbs/23/8e/0931fc70f9b2ed0f1925eec4730099a456fe/1400x_crop=center;format=webp/managed/ce/f3/cef3f6c8b32aaf649960a591133c8938/NJ0150-81Z.png.thumb.webp",
+              "source": "JSON-LD Product.image"
+            },
+            "price": {
+              "value": "299.0 EUR",
+              "source": "JSON-LD Product.offers (prix source, devise non convertie)"
+            }
+          },
+          "missing": [
+            "diameter",
+            "thickness",
+            "lugToLug",
+            "movement",
+            "powerReserve",
+            "waterResistance",
+            "crystal"
+          ],
+          "description": "",
+          "url": ""
+        }
+      ],
+      "metadata": {
+        "title": "NJ0150-81Z Male Stainless steel | yellow | ø 40mm Citizen Onlineshop",
+        "ogTitle": "Male Stainless steel | yellow | ø 40mm NJ0150-81Z | Citizen Onlineshop",
+        "ogImage": "https://citizenwatch.eu/media/thumbs/4b/36/d0f9d0af37ba76ba8e3833036c69994c68a8/1200x628_crop=center/managed/ce/f3/cef3f6c8b32aaf649960a591133c8938/NJ0150-81Z.png.thumb.png",
+        "description": "Official Shop - Visit the official Citizen Watch online shop. Discover a wide range of products now. Wide selection of Citizen watches available."
+      },
+      "requiresProductSelection": false,
+      "accuracy": "Non évaluée : nécessite comparaison manuelle à la fiche. Présence de données ≠ exactitude.",
+      "access": {
+        "id": "citizen-eu",
+        "url": "https://citizenwatch.eu/en/p/nj0150-81z/",
+        "finalUrl": "https://citizenwatch.eu/en/p/nj0150-81z/",
+        "status": 200,
+        "bytes": 446923,
+        "contentType": "text/html; charset=utf-8",
+        "encoding": "utf-8"
+      },
+      "snapshotSha256": "594ac12432c6935ff2b7e8030eedd5021ea9b198c3672f7921d65b6bb1f91603"
+    },
+    {
+      "id": "citizen-jp",
+      "label": "Citizen Japon NB1050-59A",
+      "status": "local-snapshot",
+      "durationMs": 10,
+      "url": "https://citizen.jp/shop/g/gNB1050-59A/",
+      "pageWarning": null,
+      "jsonLdScripts": 1,
+      "parseErrors": [],
+      "productGroups": 0,
+      "candidates": [
+        {
+          "index": 0,
+          "fields": {
+            "name": {
+              "value": "NB1050-59A",
+              "source": "JSON-LD Product.name"
+            },
+            "reference": {
+              "value": "NB1050-59A",
+              "source": "JSON-LD Product.mpn/sku"
+            },
+            "image": {
+              "value": "https://citizen.jp/img/goods/S/CCL_NB1050-59A_00_EC.png",
+              "source": "JSON-LD Product.image"
+            },
+            "price": {
+              "value": "99000 JPY",
+              "source": "JSON-LD Product.offers (prix source, devise non convertie)"
+            }
+          },
+          "missing": [
+            "diameter",
+            "thickness",
+            "lugToLug",
+            "movement",
+            "powerReserve",
+            "waterResistance",
+            "crystal"
+          ],
+          "description": "",
+          "url": ""
+        }
+      ],
+      "metadata": {
+        "title": "NB1050-59A: CITIZEN | シチズンウオッチ オフィシャルサイト【CITIZEN公式ストア】",
+        "ogTitle": "シチズンウオッチ オフィシャルサイト",
+        "ogImage": "https://citizen.jp/cms/favicon/ogp.png",
+        "description": "シチズンウオッチ オフィシャルサイト【CITIZEN公式ストア】のNB1050-59Aのページです。"
+      },
+      "requiresProductSelection": false,
+      "accuracy": "Non évaluée : nécessite comparaison manuelle à la fiche. Présence de données ≠ exactitude.",
+      "access": {
+        "id": "citizen-jp",
+        "url": "https://citizen.jp/shop/g/gNB1050-59A/",
+        "finalUrl": "https://citizen.jp/shop/g/gNB1050-59A/",
+        "status": 200,
+        "bytes": 46587,
+        "contentType": "text/html; charset=utf-8",
+        "encoding": "utf-8"
+      },
+      "snapshotSha256": "570a2c3fdd2326dc516d6b9af30a0e4baf8fb8f4d64b225aef5ea27c8ddb8d59"
+    },
+    {
+      "id": "hamilton",
+      "label": "Hamilton H38525721",
+      "status": "local-snapshot",
+      "durationMs": 11,
+      "url": "https://www.hamiltonwatch.com/en-int/h38525721-jazzmaster-thinline-auto.html",
+      "pageWarning": null,
+      "jsonLdScripts": 1,
+      "parseErrors": [],
+      "productGroups": 0,
+      "candidates": [
+        {
+          "index": 0,
+          "fields": {
+            "name": {
+              "value": "Jazzmaster Thinline Auto",
+              "source": "JSON-LD Product.name"
+            },
+            "reference": {
+              "value": "H38525721",
+              "source": "JSON-LD Product.mpn/sku"
+            },
+            "image": {
+              "value": "https://www.hamiltonwatch.com/media/catalog/product/h/3/h38525721.png",
+              "source": "JSON-LD Product.image"
+            },
+            "price": {
+              "value": "925.00 CHF",
+              "source": "JSON-LD Product.offers (prix source, devise non convertie)"
+            }
+          },
+          "missing": [
+            "diameter",
+            "thickness",
+            "lugToLug",
+            "movement",
+            "powerReserve",
+            "waterResistance",
+            "crystal"
+          ],
+          "description": "With the Jazzmaster Thinline Automatic, you can create a Hamilton timepiece tailored to suit your style. There are four different dial and strap color combinations to choose from so you can change your strap to suit your mood and a choice of tan, black and olive green straps available.",
+          "url": ""
+        }
+      ],
+      "metadata": {
+        "title": "Jazzmaster Thinline Auto - Dial color:Beige - H38525721 | Hamilton Watch",
+        "ogTitle": "Jazzmaster Thinline Auto | H38525721",
+        "ogImage": "https://www.hamiltonwatch.com/media/catalog/product/cache/6517c62f5899ad6aa0ba23ceb3eeff97/h/3/h38525721.png",
+        "description": "Hamilton is the leading brand for automatic watches. The Hamilton watches combine the American Spirit with the Swiss precision and latest technologies."
+      },
+      "requiresProductSelection": false,
+      "accuracy": "Non évaluée : nécessite comparaison manuelle à la fiche. Présence de données ≠ exactitude.",
+      "access": {
+        "id": "hamilton",
+        "url": "https://www.hamiltonwatch.com/en-int/h38525721-jazzmaster-thinline-auto.html",
+        "finalUrl": "https://www.hamiltonwatch.com/en-int/h38525721-jazzmaster-thinline-auto.html",
+        "status": 200,
+        "bytes": 391255,
+        "contentType": "text/html; charset=UTF-8",
+        "encoding": "utf-8"
+      },
+      "snapshotSha256": "ccb612f6bc11bb5ff01f8c022ce3fceb1ff10f7a19b1f504f78aa281095b5d0c"
+    },
+    {
+      "id": "brew",
+      "label": "Brew Metric Retro Dial / METRIC-BLK",
+      "status": "local-snapshot",
+      "durationMs": 17,
+      "url": "https://www.brew-watches.com/products/brew-metric-retro-black",
+      "pageWarning": null,
+      "jsonLdScripts": 2,
+      "parseErrors": [],
+      "productGroups": 0,
+      "candidates": [
+        {
+          "index": 0,
+          "fields": {
+            "name": {
+              "value": "Metric - Retro Dial Chronograph Watch",
+              "source": "JSON-LD Product.name"
+            },
+            "reference": {
+              "value": "METRIC-BLK",
+              "source": "JSON-LD Product.mpn/sku"
+            },
+            "image": {
+              "value": "https://www.brew-watches.com/cdn/shop/files/BREWMETRICFRONTRETRODIAL-SD_3000x.jpg?v=1700672505",
+              "source": "JSON-LD Product.image"
+            },
+            "price": {
+              "value": "475 USD",
+              "source": "JSON-LD Product.offers (prix source, devise non convertie)"
+            }
+          },
+          "missing": [
+            "diameter",
+            "thickness",
+            "lugToLug",
+            "movement",
+            "powerReserve",
+            "waterResistance",
+            "crystal"
+          ],
+          "description": "METRIC CHRONOGRAPH:Offering a classic - compact style with its 1970s style case. Blended steel and contrasting brushed components give this watch its industrial styling and clarity. Above all else, the 36mm size makes this watch distinctive to its era while making it comfortable and wearable for any occasion.Red Dot Award: Design Concept 2026 Recipient Brew 1:1 Size GuideWatch Comparison Guide",
+          "url": "https://www.brew-watches.com/products/brew-metric-retro-black"
+        }
+      ],
+      "metadata": {
+        "title": "Metric - Retro Dial Chronograph Watch &ndash; Brew Watches",
+        "ogTitle": "Metric - Retro Dial Chronograph Watch",
+        "ogImage": "http://www.brew-watches.com/cdn/shop/files/BREWMETRICFRONTRETRODIAL-SD.jpg?v=1700672505",
+        "description": "METRIC CHRONOGRAPH:Offering a classic - compact style with its 1970s style case. Blended steel and contrasting brushed components give this watch its industrial styling and clarity. Above all else, the 36mm size makes this watch distinctive to its era while making it comfortable and wearable for any occasion.Red Dot Aw"
+      },
+      "requiresProductSelection": false,
+      "accuracy": "Non évaluée : nécessite comparaison manuelle à la fiche. Présence de données ≠ exactitude.",
+      "access": {
+        "id": "brew",
+        "url": "https://www.brew-watches.com/products/brew-metric-retro-black",
+        "finalUrl": "https://www.brew-watches.com/products/brew-metric-retro-black",
+        "status": 200,
+        "bytes": 456219,
+        "contentType": "text/html; charset=utf-8",
+        "encoding": "utf-8"
+      },
+      "snapshotSha256": "49007e578171b015e0708af603962bb03621abcfadcfb17500ac2da9e7550627"
+    }
+  ]
+}
