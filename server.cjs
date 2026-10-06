@@ -19,7 +19,11 @@ function validate(raw){
   const blocks=w.blocks.map(b=>({title:string(b.title,1000),text:string(b.text)}));
   const status=w.status??'wanted';if(!['wanted','owned','rejected'].includes(status)||('archived'in w&&typeof w.archived!=='boolean'))throw Error('Statut invalide.');
   const variants=w.variants??[];if(!Array.isArray(variants)||variants.length>100)throw Error('Variantes invalides.');const normalizedVariants=variants.map(v=>{const name=string(v.name,250).trim();if(!name)throw Error('Une variante doit avoir un nom.');const photoIndex=v.photoIndex??null;if(photoIndex!==null&&(!Number.isInteger(photoIndex)||photoIndex<0||photoIndex>=images.length))throw Error('Photo de variante invalide.');const url=string(v.url??'',4000);if(url&&!https(url))throw Error('Lien de variante invalide.');return{name,reference:string(v.reference??'',250),color:string(v.color??'',100),photoIndex,url}});
-  return{id,name,status,archived:w.archived===true,variants:normalizedVariants,roles:[...w.roles],summary:string(w.summary??''),subtitle:string(w.subtitle??''),notes:string(w.notes??''),specs,images,links,blocks};
+  const defaultVariant=w.defaultVariant??null,defaultPhoto=w.defaultPhoto??null;
+  if(defaultVariant!==null&&(!Number.isInteger(defaultVariant)||defaultVariant<0||defaultVariant>=normalizedVariants.length||normalizedVariants[defaultVariant].photoIndex===null))throw Error('Variante de collection invalide.');
+  if(defaultPhoto!==null&&(!Number.isInteger(defaultPhoto)||defaultPhoto<0||defaultPhoto>=images.length))throw Error('Photo de collection invalide.');
+  if(defaultVariant!==null&&defaultPhoto!==null)throw Error('Choisissez une variante ou une photo pour la collection.');
+  return{id,name,status,archived:w.archived===true,variants:normalizedVariants,defaultVariant,defaultPhoto,roles:[...w.roles],summary:string(w.summary??''),subtitle:string(w.subtitle??''),notes:string(w.notes??''),specs,images,links,blocks};
  });
  const chosen=raw.chosen.map((id,i)=>{if(id===null)return null;const w=watches.find(w=>w.id===id);if(!w||!w.roles.includes(i)||w.archived||w.status==='rejected')throw Error('Un choix principal ne correspond pas à sa catégorie.');return id});
  return{version:1,watches,chosen};
@@ -184,7 +188,7 @@ function createServer({password='',dataDir=path.join(__dirname,'.collection-data
    if(req.method==='POST'&&url.pathname==='/api/logout'){sessions.delete(tokenOf(req));json(res,200,{ok:true},{'Set-Cookie':cookie('',0)});return}
    if(req.method==='GET'&&url.pathname==='/api/collection'){const record=await read();json(res,200,url.searchParams.get('revision')===String(record.revision)?{revision:record.revision,unchanged:true}:record);return}
    if(req.method==='PUT'&&url.pathname==='/api/collection'){
-    const input=await body(req);if(Array.isArray(input.collection?.watches)&&input.collection.watches.some(w=>!w||w.status===undefined||typeof w.archived!=='boolean'||!Array.isArray(w.variants)))throw fail(426,'Cette page utilise une ancienne version du carnet. Rechargez-la avant de sauvegarder pour préserver les statuts et variantes.');if(!Number.isSafeInteger(input.revision)||input.revision<0)throw fail(400,'Version invalide.');let collection;try{collection=validate(input.collection)}catch(e){throw fail(400,e.message)}
+    const input=await body(req);if(Array.isArray(input.collection?.watches)&&input.collection.watches.some(w=>!w||w.status===undefined||typeof w.archived!=='boolean'||!Array.isArray(w.variants)||w.defaultVariant===undefined||w.defaultPhoto===undefined))throw fail(426,'Cette page utilise une ancienne version du carnet. Rechargez-la avant de sauvegarder pour préserver les statuts et variantes de collection.');if(!Number.isSafeInteger(input.revision)||input.revision<0)throw fail(400,'Version invalide.');let collection;try{collection=validate(input.collection)}catch(e){throw fail(400,e.message)}
     const operation=writing.then(async()=>{
      const current=await read();if(current.revision!==input.revision){json(res,409,{error:'La collection a changé dans un autre navigateur.',revision:current.revision});return}
      const next={revision:current.revision+1,collection};await fs.mkdir(dataDir,{recursive:true,mode:0o700});const temporary=path.join(dataDir,'collection-'+crypto.randomBytes(8).toString('hex')+'.tmp');

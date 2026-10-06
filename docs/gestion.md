@@ -26,6 +26,18 @@ Seule la validation **Enregistrer la montre** applique ces modifications. **Annu
 
 Les anciennes galeries restent consultables telles quelles : cette version n’invente pas des références ou des couleurs pour remplir automatiquement les variantes structurées.
 
+## Variante affichée dans la collection — version 0.5.1
+
+Sur la fiche, cliquez sur une variante de couleur ou sur une photo de la galerie, puis sur **Afficher dans ma collection**. Parcourir les photos reste un aperçu ; seul ce bouton enregistre l’affichage choisi. La sélection d’une variante affiche sa photo, son nom/couleur et sa référence sur la carte de collection. Une variante sans photo associée doit d’abord être complétée dans l’éditeur.
+
+Les anciennes galeries sans variantes structurées sont prises en charge : choisissez directement une photo. **Revenir à la photo principale** rétablit l’affichage initial. Le choix de couleur est commun aux rôles de cette montre et ne change pas votre choix de montre principale par rôle.
+
+Le choix est conservé dans la sauvegarde JSON/HTML et, en mode connecté, partagé entre les navigateurs. La fiche s’ouvre avec cette photo par défaut. Une modification de variante conserve son choix ; retirer une variante qui précède celle choisie ne déplace pas la sélection vers une autre couleur. Supprimer la variante choisie ou retirer sa photo associée rétablit la photo principale. Les images restent dans la galerie.
+
+Depuis la collection, cliquez sur **la photo ou le nom** pour ouvrir la fiche. Ces deux boutons sont également accessibles au clavier ; le bouton « Voir la fiche » reste disponible.
+
+Pour mettre à jour, remplacez les deux fichiers applicatifs, conservez vos données et votre fichier d’environnement, puis redémarrez et rechargez les navigateurs. Les anciennes sauvegardes s’importent avec la photo principale par défaut. Les anciennes pages ne peuvent pas effacer les nouveaux choix lors d’une sauvegarde : elles doivent être rechargées.
+
 ## Supprimer et récupérer
 
 **Supprimer** demande une confirmation nommant la montre. La fiche est retirée de la collection, avec ses notes, variantes et photos intégrées, puis la modification est synchronisée. Cette version n’a pas de corbeille : privilégiez l’archivage si vous souhaitez simplement mettre une montre de côté.
@@ -37,3 +49,5 @@ Un export JSON/HTML réalisé avant suppression conserve une copie. Importer une
 Tests sur serveur réel : statuts persistants, variantes et photo associée, édition des sources et avis, notes et images préservées, annulation, archivage/restauration, retrait des choix principaux, visibilité des candidates, suppression avec annulation, récupération JSON et lecture depuis un autre navigateur. Compatibilité des anciens exports et refus d’une référence de photo invalide également vérifiés.
 
 Le déploiement sur votre homelab n’est pas effectué depuis cet environnement. Les quatre suites existantes vérifient aussi la sauvegarde, les conflits, les photos et les exports.
+
+La suite supplémentaire de la version 0.5.1 vérifie les clics photo/nom et le clavier, la variante et les galeries simples, la persistance et le second navigateur, les exports, l’édition/suppression des variantes, le retour à la photo principale et la protection contre une ancienne page.

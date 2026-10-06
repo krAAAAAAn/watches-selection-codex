@@ -6,7 +6,7 @@ Carnet horloger au style sombre, avec 41 fiches initiales issues du magazine fou
 
 Pour l’usage local, téléchargez `index.html` et ouvrez-le dans votre navigateur. Pour la synchronisation sur votre homelab, suivez [le guide de déploiement](docs/homelab.md) : Node.js 20+, deux fichiers applicatifs et un dossier de données durable.
 
-- **Ma collection** : explorer les candidates de chaque rôle et choisir explicitement votre montre principale. Le rôle diver reste une envie future.
+- **Ma collection** : explorer les candidates de chaque rôle et choisir explicitement votre montre principale ; cliquer sur sa photo ou son nom ouvre la fiche. Le rôle diver reste une envie future.
 - **Le catalogue** : rechercher un modèle, ses caractéristiques ou vos notes ; filtrer par rôle et trier.
 - **La fiche** : consulter les caractéristiques, les photos/variantes disponibles et les liens ; modifier la fiche et saisir vos notes.
 - **Ajouter une montre** : saisie manuelle ou proposition depuis une fiche produit HTTPS, avec enrichissement IA facultatif et vérification avant enregistrement.
@@ -78,3 +78,5 @@ Version 0.4 : statuts possédée/souhaitée/écartée, archives réversibles, su
 ## Ajout par URL et IA facultative
 
 Version 0.5 : analyse simple des fiches produit, proposition avec sources et validation manuelle. Pour activer l’enrichissement IA, configurez `AI_ENDPOINT` (URL complète Chat Completions), `AI_MODEL` et éventuellement `AI_API_KEY` dans l’environnement du serveur. Sans ces variables, le carnet reste utilisable et l’analyse simple ne fait aucun appel IA. Voir [la configuration et les limites](docs/import-ia.md).
+
+Version 0.5.1 : sur la fiche, choisissez une variante ou une photo, puis **Afficher dans ma collection** pour mémoriser son illustration. Le choix suit la sauvegarde partagée et les exports. Voir [le fonctionnement des variantes](docs/gestion.md).
